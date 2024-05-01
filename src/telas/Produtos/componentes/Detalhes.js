@@ -22,14 +22,14 @@ const styles = StyleSheet.create({
       paddingHorizontal: 16,
     },
     nome: {
-      color: "purple",
+      color: "#01426c",
       fontSize: 26,
       fontWeight: "bold",
       paddingTop: 25,
       paddingLeft: 10,
     },
     descricao: {
-      color: "gray",
+      color: "black",
       fontSize: 18,
     },
     preco: {

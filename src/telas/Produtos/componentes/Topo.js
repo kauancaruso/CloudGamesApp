@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Dimensions, Image, StatusBar} from 'react-native';
 
-import Header from '../../../../assets/produtos/produto35.jpeg'
+import Header from '../../../../assets/produtos/mw3.jpg'
 import Texto from '../../../componentes/Texto' //Componente de Exibição de Texto
 
 //Captura o tamanho da tela que está rodando o app
@@ -27,6 +27,6 @@ const styles = StyleSheet.create({
       fontSize: 22,
       color: "white",
       fontWeight: "bold",
-      padding: 10,
+      padding: 30,
     },
   });
