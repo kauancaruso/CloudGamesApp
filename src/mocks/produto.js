@@ -1,37 +1,28 @@
 import Logo from '../../assets/logo.png';
-import passa_fita from '../../assets/produtos/passa_fita.png'
-import fita_cetim from '../../assets/produtos/fita_cetim.png'
-import laise from '../../assets/produtos/laise.png'
+import soapPack from '../../assets/produtos/soapPack.png'
+import ghostZombie from '../../assets/produtos/ghostZombie.jpg'
 
 const produto = {
-    topo: {
-        titulo: "Detalhes do produto",
-    },
     detalhes: {
-        nome: "Kit de Panos de Copa",
+        nome: "Call of Duty - MW III",
         logo: Logo,
-        detalhes: "Um kit com panos de copa feitos a mão com muito carinho para deixar sua cozinha mais bonita!",
-        preco: "R$ 50,00",
+        detalhes: "Na sequência direta do recordista Call of Duty®: Modern Warfare® II, Capitão Price e a Força-tarefa 141 enfrentam a ameaça definitiva.",
+        preco: "R$ 299,90",
         botao: "Adicionar na Lista de Desejos",
     },
     itens: {
-        titulo: "Itens do Kit",
+        titulo: "Itens do Jogo",
         lista: [
             {
                 id: 1,
-                nome: "1x Fita de Cetim",
-                imagem: fita_cetim,
+                nome: "1x Pacote de Operador Soap",
+                imagem: soapPack,
             },
             {
                 id: 2,
-                nome: "2x Passa Fita",
-                imagem: passa_fita,
-            },
-            {
-                id: 3,
-                nome: "1x Laise",
-                imagem: laise,
-            },
+                nome: "1x Skin Ghost Zumbi",
+                imagem: ghostZombie,
+            }
         ]
     }
 }

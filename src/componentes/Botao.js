@@ -12,7 +12,7 @@ export default function Botao({textoBotao, clickBotao}){
 const styles = StyleSheet.create({
     botao: {
         marginTop: 16,
-        backgroundColor: "purple",
+        backgroundColor: "#01426c",
         paddingVertical: 16,
         borderRadius: 6,
       },
