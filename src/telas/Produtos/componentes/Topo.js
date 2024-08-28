@@ -27,10 +27,6 @@ const styles = StyleSheet.create({
       fontSize: 22,
       color: "white",
       fontWeight: "bold",
-<<<<<<< HEAD
       padding: 50,
-=======
-      padding: 30,
->>>>>>> 54d2ad2919d96b1d7fd4c4d1ac1588536f0c370a
     },
   });
