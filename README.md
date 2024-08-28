@@ -1,5 +1,3 @@
----
-
 # Cloud Games
 
 **Cloud Games** é uma plataforma para compra de chaves de jogos, permitindo que os usuários adquiram seus títulos favoritos de maneira rápida e segura.
