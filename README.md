@@ -36,10 +36,6 @@
    expo start
    ```
 
-## 🛠️ Contribuição
-
-Contribuições são bem-vindas! Sinta-se à vontade para abrir uma [issue](https://github.com/kauancaruso/ClouGgamesApp/issues) ou enviar um pull request.
-
 ## 📄 Licença
 
 Este projeto está licenciado sob a licença MIT - veja o arquivo [LICENSE](LICENSE) para mais detalhes.
