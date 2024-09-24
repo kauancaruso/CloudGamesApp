@@ -80,9 +80,9 @@ export default function Perfil() {
         placeholder="Digite sua senha"
         value={senha}
         onChangeText={setSenha}
-        keyboardType="numeric"  // Apenas números
+        keyboardType="numeric" 
         secureTextEntry
-        maxLength={6}  // Limite de 6 caracteres
+        maxLength={6}
       />
 
       <TouchableOpacity style={styles.button} onPress={handleCadastro}>
@@ -144,11 +144,11 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     alignItems: 'center',
     marginTop: 20,
-    shadowColor: '#000', // Cor da sombra (normalmente preto)
-    shadowOffset: { width: 0, height: 4 }, // Deslocamento da sombra
-    shadowOpacity: 0.7, // Opacidade da sombra
-    shadowRadius: 4, // Raio da sombra
-    elevation: 5, // Propriedade específica para Android (aumenta a altura da sombra)
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.7,
+    shadowRadius: 4,
+    elevation: 5,
   },
   buttonText: {
     color: '#FFF',
