@@ -6,6 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Audio } from 'expo-av';
 
+
 import Produto from './src/telas/Produtos/';
 import mock from './src/mocks/produto';
 
@@ -17,6 +18,12 @@ import mock_jogos from './src/mocks/jogos';
 import Texto from './src/componentes/Texto';
 
 import Perfil from './src/telas/Perfil';
+
+import ListaDesejos from './src/telas/ListaDesejos'
+
+function MenuListaDesejos() {
+  return <ListaDesejos />;
+}
 
 function MenuPerfil() {
   return <Perfil />;
@@ -113,7 +120,7 @@ function TabsMenu() {
       <Tab.Screen name="Pacote" component={MenuKit} />
       <Tab.Screen name="Sobre nós" component={MenuSobre} />
       <Tab.Screen name="Produtos" component={MenuJogos} />
-      <Tab.Screen name="Lista de Desejos" component={MenuKit} />
+      <Tab.Screen name="Lista de Desejos" component={MenuListaDesejos} />
       <Tab.Screen name="Perfil" component={MenuPerfil} />
     </Tab.Navigator>
   );

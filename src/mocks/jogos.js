@@ -10,7 +10,7 @@ import cupH from '../../assets/produtos/cupH.jpg';
 
 const jogos = [
     {
-        id: '1',
+        id: '1', // Certifique-se de que o ID está definido corretamente
         nome: 'Disco Elysium: The Final Cut',
         imagem: detfc,
         preco: 'R$ 75,50',
@@ -59,7 +59,7 @@ const jogos = [
     },
     {
         id: '9',
-        nome: 'Cuphead\n',
+        nome: 'Cuphead',
         imagem: cupH,
         preco: 'R$ 36,90',
     }
