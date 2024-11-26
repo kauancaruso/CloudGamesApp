@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { View, TextInput, StyleSheet, Alert, Image, TouchableOpacity, Text } from 'react-native';
+import { View, TextInput, StyleSheet, Alert, Image, TouchableOpacity, Text, ActivityIndicator, ScrollView, KeyboardAvoidingView } from 'react-native';
 import { Camera } from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
 import Texto from '../../componentes/Texto';
 
 export default function Perfil() {
   const [nome, setNome] = useState('');
+  const [cep, setCep] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+  const [numero, setNumero] = useState('');
+  const [complemento, setComplemento] = useState('');
   const [hasPermission, setHasPermission] = useState(null);
   const [image, setImage] = useState(null);
+  const [endereco, setEndereco] = useState('');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -30,9 +35,34 @@ export default function Perfil() {
     }
   };
 
+  const buscarEndereco = async (cep) => {
+    const cleanedCep = cep.replace(/\D/g, ''); // Remove caracteres não numéricos
+    if (cleanedCep.length === 8) {
+      setLoading(true);
+      try {
+        const response = await fetch(`https://viacep.com.br/ws/${cleanedCep}/json/`);
+        const data = await response.json();
+        if (data.erro) {
+          Alert.alert('Erro', 'CEP inválido. Verifique e tente novamente.');
+          setEndereco('');
+        } else {
+          setEndereco(`${data.logradouro}, ${data.bairro}, ${data.localidade} - ${data.uf}`);
+        }
+      } catch (error) {
+        Alert.alert('Erro', 'Não foi possível buscar o endereço.');
+        setEndereco('');
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+
   const handleCadastro = () => {
-    if (nome && email && senha) {
-      Alert.alert('Cadastro realizado com sucesso!', `Nome: ${nome}\nEmail: ${email}`);
+    if (nome && email && senha && numero) {
+      Alert.alert(
+        'Cadastro realizado com sucesso!',
+        `Nome: ${nome}\nEmail: ${email}\nEndereço: ${endereco}, ${numero} - ${complemento || ''}`
+      );
     } else {
       Alert.alert('Erro', 'Por favor, preencha todos os campos.');
     }
@@ -46,58 +76,101 @@ export default function Perfil() {
   }
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity onPress={pickImage} style={styles.imageContainer}>
-        {image ? (
-          <Image source={{ uri: image }} style={styles.image} />
+    <KeyboardAvoidingView style={styles.container} behavior="padding">
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <TouchableOpacity onPress={pickImage} style={styles.imageContainer}>
+          {image ? (
+            <Image source={{ uri: image }} style={styles.image} />
+          ) : (
+            <View style={styles.placeholder}>
+              <Texto style={styles.placeholderText}>Tire uma foto</Texto>
+            </View>
+          )}
+        </TouchableOpacity>
+
+        <Texto style={styles.label}>Nome</Texto>
+        <TextInput
+          style={styles.input}
+          placeholder="Digite seu nome"
+          value={nome}
+          onChangeText={setNome}
+        />
+
+        <Texto style={styles.label}>CEP</Texto>
+        <TextInput
+          style={styles.input}
+          placeholder="Digite seu CEP"
+          value={cep}
+          onChangeText={(value) => {
+            setCep(value);
+            buscarEndereco(value);
+          }}
+          keyboardType="numeric"
+          maxLength={9}
+        />
+
+        {loading ? (
+          <ActivityIndicator size="small" color="#01426c" />
         ) : (
-          <View style={styles.placeholder}>
-            <Texto style={styles.placeholderText}>Tire uma foto</Texto>
-          </View>
+          endereco && (
+            <>
+              <Texto style={styles.label}>Endereço: {endereco}</Texto>
+
+              <Texto style={styles.label}>Número</Texto>
+              <TextInput
+                style={styles.input}
+                placeholder="Digite o número"
+                value={numero}
+                onChangeText={setNumero}
+                keyboardType="numeric"
+              />
+
+              <Texto style={styles.label}>Complemento</Texto>
+              <TextInput
+                style={styles.input}
+                placeholder="Digite o complemento (opcional)"
+                value={complemento}
+                onChangeText={setComplemento}
+              />
+            </>
+          )
         )}
-      </TouchableOpacity>
 
-      <Texto style={styles.label}>Nome</Texto>
-      <TextInput
-        style={styles.input}
-        placeholder="Digite seu nome"
-        value={nome}
-        onChangeText={setNome}
-      />
+        <Texto style={styles.label}>Email</Texto>
+        <TextInput
+          style={styles.input}
+          placeholder="Digite seu email"
+          value={email}
+          onChangeText={setEmail}
+          keyboardType="email-address"
+        />
 
-      <Texto style={styles.label}>Email</Texto>
-      <TextInput
-        style={styles.input}
-        placeholder="Digite seu email"
-        value={email}
-        onChangeText={setEmail}
-        keyboardType="email-address"
-      />
+        <Texto style={styles.label}>Senha</Texto>
+        <TextInput
+          style={styles.input}
+          placeholder="Digite sua senha"
+          value={senha}
+          onChangeText={setSenha}
+          keyboardType="numeric"
+          secureTextEntry
+          maxLength={6}
+        />
 
-      <Texto style={styles.label}>Senha</Texto>
-      <TextInput
-        style={styles.input}
-        placeholder="Digite sua senha"
-        value={senha}
-        onChangeText={setSenha}
-        keyboardType="numeric" 
-        secureTextEntry
-        maxLength={6}
-      />
-
-      <TouchableOpacity style={styles.button} onPress={handleCadastro}>
-        <Text style={styles.buttonText}>Cadastrar</Text>
-      </TouchableOpacity>
-    </View>
+        <TouchableOpacity style={styles.button} onPress={handleCadastro}>
+          <Text style={styles.buttonText}>Cadastrar</Text>
+        </TouchableOpacity>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    padding: 16,
     backgroundColor: '#F2F2F2',
+  },
+  scrollContainer: {
+    padding: 16,
   },
   imageContainer: {
     alignSelf: 'center',
